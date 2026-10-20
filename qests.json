@@ -21,6 +21,17 @@
       "correct": 3,
       "points": 2
     },{
+      "q": "Какой ник у ->",
+      "options": [
+        "ПовелительГалактики2014",
+        "Моноколесист на Чили",
+        "Стёпа блогер",
+        "Моноколесист"
+      ],
+      "correct": 4,
+      "points": 3,
+      "image":"https://p16-common-sign.tiktokcdn.com/tos-useast2a-avt-0068-euttp/f91747c327fca8ec2446686215cac92f~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d808903a&x-expires=1792688400&x-signature=uf3TzSBa1PreMwzXy9tEvbt3y3w%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my"
+    },{
       "q": "Что говорит ->",
       "options": [
         "Этот вид пираний исчез с лица земли более двух миллионов лет назад!",
@@ -29,7 +40,7 @@
         "Не смей шутить с временем!"
       ],
       "correct": 0,
-      "points": 2,
+      "points": 1,
       "image":"https://raw.githubusercontent.com/digieg0/digieg0.github.io/refs/heads/main/__.png"
     }
   ]
