@@ -1,3 +1,13 @@
 {
-  "1":"1"
+  "title": "Бурмалет",
+  "resultImage": "https://example.com/winner.jpg",
+  "questions": [
+    {
+      "q": "Столица Австралии?",
+      "options": ["Сидней", "Мельбурн", "Канберра", "Перт"],
+      "correct": 2,
+      "points": 1,
+      "image": "https://example.com/optional.jpg"
+    }
+  ]
 }
