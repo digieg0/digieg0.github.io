@@ -1,1 +1,300 @@
-<h1>Test good good!</h1>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бурмалет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2340ff; --deep:#0d1a8c; --ink:#0b0f2a; --paper:#fffaf0;
+  --yellow:#ffd23f; --red:#ff4d4d; --green:#2fd17a; --pink:#ff7ad9; --sky:#7fd8ff;
+  --font:"Rubik","Arial Black",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--deep)}
+body{font:500 36px/1.25 var(--font);color:var(--paper)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:6px solid #fff;outline-offset:4px}
+
+/* Сцена 1920×1080, масштабируется под экран */
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;background:var(--blue);transform-origin:center;overflow:hidden}
+.screen{position:absolute;inset:0;padding:70px 80px;display:none}
+.screen.on{display:block}
+
+.btn{background:var(--yellow);color:var(--ink);border:5px solid var(--ink);border-radius:16px;padding:18px 56px;font-weight:800;font-size:42px;box-shadow:8px 8px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translate(6px,6px);box-shadow:2px 2px 0 var(--ink)}
+.btn.alt{background:var(--paper)}
+
+/* 1. Старт */
+#start{text-align:center}
+#start .hi{position:absolute;left:0;right:0;top:150px;font-size:52px}
+#start h1{position:absolute;left:0;right:0;top:215px;margin:0;font-size:230px;line-height:1;font-weight:800;letter-spacing:-.02em;color:var(--yellow);text-shadow:10px 10px 0 var(--ink)}
+#start .ask{position:absolute;left:0;right:0;top:535px;font-size:46px}
+.teams-in{position:absolute;left:80px;right:80px;top:625px;display:flex;gap:24px}
+.teams-in input{flex:1;min-width:0;height:100px;background:var(--paper);color:var(--ink);border:5px solid var(--ink);border-radius:16px;box-shadow:8px 8px 0 var(--ink);text-align:center;font-size:38px;font-weight:500}
+.teams-in input::placeholder{color:#8b8fa8}
+.teams-in input:focus{background:var(--yellow);outline:0}
+#start .btn{position:absolute;left:50%;top:820px;transform:translateX(-50%)}
+#start .btn:active{transform:translate(calc(-50% + 6px),6px)}
+#start .btn[disabled]{opacity:.45;cursor:default;box-shadow:none}
+#note{position:absolute;left:0;right:0;top:960px;font-size:28px;color:var(--yellow);font-weight:400}
+
+/* 2. Вопрос */
+.top{position:absolute;left:80px;top:70px;width:440px;background:var(--paper);color:var(--ink);border:5px solid var(--ink);border-radius:20px;box-shadow:10px 10px 0 var(--ink);padding:30px 28px}
+.top h2{margin:0 0 20px;font-size:44px;font-weight:800}
+.top ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.top li{display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:8px;font-size:34px;padding:10px 12px;border-radius:12px;border-left:14px solid var(--c)}
+.top li:first-child{background:var(--yellow)}
+.top .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top .sc{font-weight:800}
+.qhead{position:absolute;left:600px;right:80px;top:70px;height:250px;display:flex;gap:40px;align-items:flex-start}
+.qhead .t{flex:1}
+.prog{font-size:34px;opacity:.8;margin-bottom:12px}
+#qtext{margin:0;font-size:62px;line-height:1.1;font-weight:800;max-height:190px;overflow:hidden}
+.qhead img{max-height:240px;max-width:380px;border:5px solid var(--ink);border-radius:16px;box-shadow:8px 8px 0 var(--ink);background:var(--paper)}
+.opts{position:absolute;left:600px;right:80px;top:350px;height:520px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:36px}
+.opt{display:flex;align-items:center;gap:28px;padding:0 36px;text-align:left;color:var(--ink);background:var(--c);border:5px solid var(--ink);border-radius:20px;box-shadow:10px 10px 0 var(--ink);font-size:48px;font-weight:500;line-height:1.1;transition:transform .12s,opacity .2s}
+.opt:nth-child(1){--c:var(--red)} .opt:nth-child(2){--c:var(--yellow)} .opt:nth-child(3){--c:var(--green)} .opt:nth-child(4){--c:var(--pink)}
+.opt .l{flex:none;width:84px;height:84px;border-radius:50%;background:var(--paper);border:5px solid var(--ink);display:grid;place-items:center;font-weight:800;font-size:46px}
+.opt:not(:disabled):hover{transform:translate(-3px,-3px)}
+.opt:disabled{cursor:default}
+.opt.no{opacity:.28;box-shadow:none}
+.opt.ok{outline:10px solid #fff;outline-offset:2px;transform:scale(1.02)}
+.award{position:absolute;left:600px;right:80px;top:910px;height:100px;display:flex;align-items:center;gap:18px}
+.award .lbl{font-size:32px;margin-right:6px}
+.chip{height:76px;padding:0 30px;background:var(--paper);color:var(--ink);border:5px solid var(--ink);border-radius:14px;font-size:32px;font-weight:500;box-shadow:5px 5px 0 var(--ink);border-bottom-color:var(--c)}
+.chip[aria-pressed=true]{background:var(--c);font-weight:800}
+.award .grow{flex:1}
+.award .btn{padding:14px 44px;font-size:38px}
+
+/* 3. Результаты */
+#end h1{margin:0;text-align:center;font-size:130px;line-height:1;font-weight:800;color:var(--yellow);text-shadow:8px 8px 0 var(--ink)}
+.rows{position:absolute;left:80px;top:260px;width:1080px;display:grid;gap:28px}
+.row{display:grid;grid-template-columns:80px 290px 1fr 190px;align-items:center;gap:20px;height:100px}
+.row .pl{font-size:56px;font-weight:800;color:var(--yellow)}
+.row .nm{font-size:44px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{height:72px;background:var(--paper);border:5px solid var(--ink);border-radius:14px;box-shadow:6px 6px 0 var(--ink);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--c);border-right:5px solid var(--ink);transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.row .tot{font-size:46px;font-weight:800;white-space:nowrap}
+.pic{position:absolute;right:100px;top:270px;width:600px;height:600px;background:var(--paper);border:5px solid var(--ink);border-radius:24px;box-shadow:14px 14px 0 var(--ink);display:grid;place-items:center;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover}
+.pic svg{width:60%}
+#again{position:absolute;left:50%;bottom:50px;transform:translateX(-50%);font-size:34px;padding:12px 44px}
+#again:active{transform:translate(calc(-50% + 6px),6px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1. Приветствие и названия команд -->
+  <main id="start" class="screen on">
+    <div class="hi">Добро пожаловать в</div>
+    <h1 id="title">Бурмалет</h1>
+    <div class="ask">Введите названия команд</div>
+    <div class="teams-in" id="teamsIn"></div>
+    <button class="btn" id="go" disabled>Начать</button>
+    <div id="note" role="status"></div>
+  </main>
+
+  <!-- 2. Вопрос -->
+  <main id="quiz" class="screen">
+    <aside class="top">
+      <h2>Топ команд</h2>
+      <ol id="top"></ol>
+    </aside>
+    <div class="qhead">
+      <div class="t"><div class="prog" id="prog"></div><h2 id="qtext"></h2></div>
+      <img id="qimg" alt="" hidden>
+    </div>
+    <div class="opts" id="opts"></div>
+    <div class="award" id="award"></div>
+  </main>
+
+  <!-- 3. Результаты -->
+  <main id="end" class="screen">
+    <h1>Результаты!</h1>
+    <div class="rows" id="rows"></div>
+    <div class="pic" id="pic"></div>
+    <button class="btn alt" id="again">Играть снова</button>
+  </main>
+
+</div>
+
+<script>
+const SRC = "https://raw.githubusercontent.com/digieg0/digieg0.github.io/refs/heads/main/qests.json";
+const MAX_TEAMS = 5;
+const TEAM_COLORS = ["#ff4d4d","#ffd23f","#2fd17a","#ff7ad9","#7fd8ff"];
+
+/* Запасные вопросы, если JSON не загрузился или в нём нет вопросов */
+const DEMO = [
+  {q:"Сколько планет в Солнечной системе?", options:["7","8","9","10"], correct:1, points:1},
+  {q:"Столица Австралии?", options:["Сидней","Мельбурн","Канберра","Перт"], correct:2, points:1},
+  {q:"Какой газ преобладает в атмосфере Земли?", options:["Кислород","Азот","Углекислый газ","Аргон"], correct:1, points:2}
+];
+
+let cfg = {title:"Бурмалет", questions:DEMO, resultImage:""};
+let teams = [], awarded = [], qi = 0, revealed = false;
+const $ = id => document.getElementById(id);
+const show = id => document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
+
+/* Масштаб сцены 16:9 под окно */
+function fit(){
+  const s = Math.min(innerWidth/1920, innerHeight/1080);
+  $("stage").style.transform = "translate(-50%,-50%) scale(" + s + ")";
+}
+addEventListener("resize", fit); fit();
+
+/* ---------- Загрузка вопросов ---------- */
+function normalize(data){
+  const list = Array.isArray(data) ? data : (data && Array.isArray(data.questions) ? data.questions : null);
+  if(!list) return null;
+  const qs = list.filter(x => x && typeof x.q === "string" && Array.isArray(x.options) && x.options.length >= 2)
+    .map(x => ({
+      q:x.q, options:x.options.slice(0,4).map(String),
+      correct:Math.min(Math.max(+x.correct||0,0),Math.min(x.options.length,4)-1),
+      points:+x.points>0 ? +x.points : 1, image:x.image||""
+    }));
+  return qs.length ? {title:data.title||cfg.title, questions:qs, resultImage:data.resultImage||""} : null;
+}
+async function load(){
+  try{
+    const r = await fetch(SRC, {cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    const n = normalize(await r.json());
+    if(n) cfg = n;
+    else $("note").textContent = "В qests.json пока нет вопросов, поэтому показаны тестовые.";
+  }catch(e){
+    $("note").textContent = "Не удалось загрузить qests.json, поэтому показаны тестовые вопросы.";
+  }
+  $("title").textContent = cfg.title;
+  document.title = cfg.title;
+}
+
+/* ---------- Экран 1 ---------- */
+const inputs = [];
+for(let i=0;i<MAX_TEAMS;i++){
+  const el = document.createElement("input");
+  el.placeholder = "Команда " + (i+1);
+  el.maxLength = 20;
+  el.setAttribute("aria-label","Название команды " + (i+1));
+  el.addEventListener("input", () => { $("go").disabled = !inputs.some(x => x.value.trim()); });
+  el.addEventListener("keydown", e => { if(e.key==="Enter" && !$("go").disabled) start(); });
+  inputs.push(el); $("teamsIn").appendChild(el);
+}
+$("go").onclick = start;
+
+function start(){
+  const used = inputs.map((x,i) => ({name:x.value.trim(), color:TEAM_COLORS[i]})).filter(x => x.name);
+  teams = used;
+  awarded = cfg.questions.map(() => new Set());
+  qi = 0; renderQ(); show("quiz");
+}
+
+/* ---------- Счёт ---------- */
+function ranked(){
+  return teams.map((t,i) => ({
+    i, name:t.name, color:t.color,
+    score: awarded.reduce((s,set,k) => s + (set.has(i) ? cfg.questions[k].points : 0), 0)
+  })).sort((a,b) => b.score - a.score || a.i - b.i);
+}
+
+/* ---------- Экран 2 ---------- */
+function renderTop(){
+  const ol = $("top"); ol.textContent = "";
+  ranked().forEach((r,k) => {
+    const li = document.createElement("li");
+    li.style.setProperty("--c", r.color);
+    li.innerHTML = '<span></span><span class="nm"></span><span class="sc"></span>';
+    li.children[0].textContent = (k+1) + ")";
+    li.children[1].textContent = r.name;
+    li.children[2].textContent = r.score;
+    ol.appendChild(li);
+  });
+}
+function renderQ(){
+  const q = cfg.questions[qi]; revealed = false;
+  $("prog").textContent = "Вопрос " + (qi+1) + " из " + cfg.questions.length + (q.points>1 ? ", баллов: " + q.points : "");
+  $("qtext").textContent = q.q;
+  const img = $("qimg");
+  if(q.image){ img.src = q.image; img.hidden = false; } else { img.hidden = true; img.removeAttribute("src"); }
+  const box = $("opts"); box.textContent = "";
+  q.options.forEach((text,i) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = '<span class="l"></span><span></span>';
+    b.children[0].textContent = "АБВГ"[i];
+    b.children[1].textContent = text;
+    b.onclick = reveal;
+    box.appendChild(b);
+  });
+  renderAward(); renderTop();
+}
+function reveal(){
+  if(revealed) return; revealed = true;
+  const q = cfg.questions[qi];
+  [...$("opts").children].forEach((b,i) => { b.disabled = true; b.classList.add(i === q.correct ? "ok" : "no"); });
+  renderAward();
+}
+function renderAward(){
+  const box = $("award"); box.textContent = "";
+  if(!revealed){
+    const b = document.createElement("button");
+    b.className = "btn alt"; b.textContent = "Показать ответ"; b.onclick = reveal;
+    box.appendChild(b); return;
+  }
+  const l = document.createElement("span");
+  l.className = "lbl"; l.textContent = "Ответили верно:"; box.appendChild(l);
+  teams.forEach((t,i) => {
+    const c = document.createElement("button");
+    c.className = "chip"; c.textContent = t.name; c.style.setProperty("--c", t.color);
+    c.setAttribute("aria-pressed", awarded[qi].has(i));
+    c.onclick = () => {
+      awarded[qi].has(i) ? awarded[qi].delete(i) : awarded[qi].add(i);
+      c.setAttribute("aria-pressed", awarded[qi].has(i)); renderTop();
+    };
+    box.appendChild(c);
+  });
+  const g = document.createElement("span"); g.className = "grow"; box.appendChild(g);
+  const last = qi === cfg.questions.length - 1;
+  const n = document.createElement("button");
+  n.className = "btn"; n.textContent = last ? "Результаты" : "Дальше";
+  n.onclick = () => last ? results() : (qi++, renderQ());
+  box.appendChild(n);
+}
+
+/* ---------- Экран 3 ---------- */
+const TROPHY = '<svg viewBox="0 0 120 120" fill="none" stroke="#0b0f2a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M36 20h48v28a24 24 0 0 1-48 0zM36 30H18c0 16 8 24 20 26M84 30h18c0 16-8 24-20 26M60 72v16M40 100h40M46 88h28" fill="#ffd23f"/></svg>';
+function results(){
+  const r = ranked(), max = Math.max(1, cfg.questions.reduce((s,q) => s + q.points, 0));
+  const box = $("rows"); box.textContent = "";
+  r.forEach((x,k) => {
+    const row = document.createElement("div"); row.className = "row";
+    row.style.setProperty("--c", x.color);
+    row.innerHTML = '<span class="pl"></span><span class="nm"></span><div class="bar"><i></i></div><span class="tot"></span>';
+    row.children[0].textContent = (k+1) + ")";
+    row.children[1].textContent = x.name;
+    row.children[3].textContent = "Итого: " + x.score;
+    box.appendChild(row);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      row.querySelector("i").style.width = (x.score / max * 100) + "%";
+    }));
+  });
+  const pic = $("pic"); pic.textContent = "";
+  if(cfg.resultImage){
+    const im = document.createElement("img"); im.src = cfg.resultImage; im.alt = "";
+    im.onerror = () => { pic.innerHTML = TROPHY; };
+    pic.appendChild(im);
+  } else pic.innerHTML = TROPHY;
+  show("end");
+}
+$("again").onclick = () => show("start");
+
+load();
+</script>
+</body>
+</html>
