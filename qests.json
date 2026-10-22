@@ -1,6 +1,7 @@
 {
   "title": "Бурмалет",
-  "questions": [{
+  "questions": [
+    {
       "q": "В чём шутка про Чили?",
       "options": [
         "Всё вокруг изображают неестественно длинным",
@@ -10,7 +11,8 @@
       ],
       "correct": 0,
       "points": 1
-    },{
+    },
+    {
       "q": "Кто такой Дмитрий Курган?",
       "options": [
         "Владелец канала ПовелительГалактики2014 также известный как адвокат меллстроя",
@@ -20,7 +22,8 @@
       ],
       "correct": 2,
       "points": 2
-    },{
+    },
+    {
       "q": "Какой ник у ->",
       "options": [
         "ПовелительГалактики2014",
@@ -30,8 +33,9 @@
       ],
       "correct": 4,
       "points": 2,
-      "image":"https://p16-common-sign.tiktokcdn.com/tos-useast2a-avt-0068-euttp/f91747c327fca8ec2446686215cac92f~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d808903a&x-expires=1792688400&x-signature=uf3TzSBa1PreMwzXy9tEvbt3y3w%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my"
-    },{
+      "image": "https://p16-common-sign.tiktokcdn.com/tos-useast2a-avt-0068-euttp/f91747c327fca8ec2446686215cac92f~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d808903a&x-expires=1792688400&x-signature=uf3TzSBa1PreMwzXy9tEvbt3y3w%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my"
+    },
+    {
       "q": "Что говорит ->",
       "options": [
         "Этот вид пираний исчез с лица земли более двух миллионов лет назад!",
@@ -41,7 +45,97 @@
       ],
       "correct": 0,
       "points": 1,
-      "image":"https://raw.githubusercontent.com/digieg0/digieg0.github.io/refs/heads/main/__.png"
+      "image": "https://raw.githubusercontent.com/digieg0/digieg0.github.io/refs/heads/main/__.png"
+    },
+    {
+      "q": "Кто изображён на фото? (тест)",
+      "options": [
+        "Равжан(?)",
+        "Михаил",
+        "Ахмед",
+        "Асхаб(?)"
+      ],
+      "correct": 1,
+      "points": 1,
+      "image": "https://raw.githubusercontent.com/digieg0/digieg0.github.io/d76e32361dd7cb438f3cbfcc0eef709a61e912e3/IMG_20261022_092414_394.jpg"
+    },
+    {
+      "q": "Какой пранк показан на фото?",
+      "options": [
+        "куриный",
+        "интеллектуальный",
+        "смысловой",
+        "«пранк в тц»"
+      ],
+      "correct": 2,
+      "points": 1,
+      "image": "https://raw.githubusercontent.com/digieg0/digieg0.github.io/d76e32361dd7cb438f3cbfcc0eef709a61e912e3/IMG_20261022_092414_394.jpg"
+    },
+    {
+      "q": "Что послужило основой для смыслового пранка?",
+      "options": [
+        "литр газировки",
+        "стакан молока",
+        "куриные сердечки",
+        "стакан колы"
+      ],
+      "correct": 2,
+      "points": 1
+    },
+    {
+      "q": "Кошечка, собачка, спорт, сто?",
+      "options": [
+        "жи-ши",
+        "ча-ща",
+        "чу-щу",
+        "ци в корне(?)"
+      ],
+      "correct": 1,
+      "points": 1
+    },
+    {
+      "q": "Что является «амбассадором» ИИ-контента?",
+      "options": [
+        "замена частей тела металлом",
+        "Ферри (моющее средство)",
+        "никакой из них",
+        "оба варианта"
+      ],
+      "correct": 1,
+      "points": 1
+    },
+    {
+      "q": "На часах",
+      "options": [
+        "03:38",
+        "нет времени",
+        "30:38",
+        "00:00"
+      ],
+      "correct": 2,
+      "points": 1
+    },
+    {
+      "q": "Как называют меллстрой?(?)",
+      "options": [
+        "птица",
+        "птенец",
+        "мама птица",
+        "папа птица"
+      ],
+      "correct": 2,
+      "points": 1
+    },
+    {
+      "q": "Это сказал «великий подик»!",
+      "options": [
+        "Литвин",
+        "рандом тип из ТТ * Слава",
+        "Путин",
+        "Слава"
+      ],
+      "correct": 2,
+      "points": 1
     }
   ]
 }
